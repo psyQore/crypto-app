@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import useSelectCoins from "../hooks/useSelectCoins";
+import useSelectCoins from "../hooks/useSelectCoins.jsx";
+import { coins } from "../data/coins";
 
 const ImputSubmit = styled.input`
   background-color: #9497ff;
@@ -20,12 +21,11 @@ const ImputSubmit = styled.input`
 `;
 
 const Form = () => {
-  const [SelectCoins] = useSelectCoins();
-
-  SelectCoins()
+  const [SelectCoins] = useSelectCoins("Elige tu Moneda", coins);
 
   return (
     <form>
+      <SelectCoins />
       <ImputSubmit type="submit" value="Cotizar" />
     </form>
   );
