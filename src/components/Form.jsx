@@ -22,7 +22,7 @@ const ImputSubmit = styled.input`
 `;
 
 const Form = () => {
-  const [SelectCoins] = useSelectCoins("Elige tu Moneda", coins);
+  const [coin, SelectCoins] = useSelectCoins("Elige tu Moneda", coins);
 
   return (
     <form>
