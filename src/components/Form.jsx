@@ -23,7 +23,7 @@ const ImputSubmit = styled.input`
   }
 `;
 
-const Form = () => {
+const Form = ({ setCoins }) => {
   const [cryptos, setCryptos] = useState([]);
   const [error, setError] = useState(false);
   const [coin, SelectCoins] = useSelectCoins("Elige tu Moneda", coins);
@@ -59,12 +59,16 @@ const Form = () => {
       return;
     }
 
-    setError(false)
+    setError(false);
+    setCoins({
+      coin,
+      cryptocurrency,
+    });
   };
 
   return (
     <>
-    {error && <Error>Todos los campos son obligatorios</Error> }
+      {error && <Error>Todos los campos son obligatorios</Error>}
       <form onSubmit={handleSubmit}>
         <SelectCoins />
         <SelectCryptocurrency />
