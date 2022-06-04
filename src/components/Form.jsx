@@ -25,6 +25,8 @@ const ImputSubmit = styled.input`
 const Form = () => {
   const [cryptos, setCryptos] = useState([]);
   const [coin, SelectCoins] = useSelectCoins("Elige tu Moneda", coins);
+  const [cryptocurrency, SelectCryptocurrency] = useSelectCoins("Elige tu Criptomoneda", cryptos);
+
 
   useEffect(() => {
     const getAPI = async () => {
@@ -48,7 +50,7 @@ const Form = () => {
   return (
     <form>
       <SelectCoins />
-      {coin}
+      <SelectCryptocurrency />
       <ImputSubmit type="submit" value="Cotizar" />
     </form>
   );
