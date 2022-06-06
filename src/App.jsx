@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import CryptoImg from "./img/imagen-criptos.png";
 import Form from "./components/Form";
 import Result from "./components/Result";
+import Spinner from "./components/Spinner";
 
 const Container = styled.div`
   max-width: 900px;
@@ -43,10 +44,15 @@ const Heading = styled.h1`
 function App() {
   const [coins, setCoins] = useState({});
   const [result, setResult] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (Object.keys(coins).length > 0) {
+
       const quoteCrypto = async () => {
+        setLoading(true);
+        setResult({})
+
         const { coin, cryptocurrency } = coins;
         const url = `https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cryptocurrency}&tsyms=${coin}`;
 
@@ -54,6 +60,7 @@ function App() {
         const result = await response.json();
 
         setResult(result.DISPLAY[cryptocurrency][coin]);
+        setLoading(false)
       };
       quoteCrypto();
     }
@@ -66,6 +73,7 @@ function App() {
         <Heading>Cotiza Critomonedas al Instante</Heading>
         <Form setCoins={setCoins} />
 
+        {loading && <Spinner/> }
         {result.PRICE && <Result result={result} />}
       </div>
     </Container>
